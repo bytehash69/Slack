@@ -11,11 +11,9 @@ import { useCreateWorkspaceModal } from "@/features/workspaces/store/use-create-
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
 import { Loader2, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
 
 export const WorkspaceSwitcher = () => {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
   const workspaceId = useWorkspaceId();
   const [_open, setOpen] = useCreateWorkspaceModal();
 
@@ -27,16 +25,9 @@ export const WorkspaceSwitcher = () => {
   const filteredWorkspaces = workspaces?.filter(
     (workspace) => workspace?._id !== workspaceId
   );
-
-  useEffect(() => {
-    setMounted(true);
-  });
-
-  if (!mounted) return null;
-
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
         <Button className="size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAAD]/80 text-slate-800 font-semibold text-lg">
           {workspaceLoading ? (
             <Loader2 className="size-5 animate-spin shrink-0" />
