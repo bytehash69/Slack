@@ -9,7 +9,7 @@ import { useGetWorkspace } from "@/features/workspaces/api/use-get-workspace";
 import { useGetWorkspaces } from "@/features/workspaces/api/use-get-workspaces";
 import { useCreateWorkspaceModal } from "@/features/workspaces/store/use-create-workspace-modal";
 import { useWorkspaceId } from "@/hooks/use-workspace-id";
-import { Loader2, Plus } from "lucide-react";
+import { Loader2, Plus, TriangleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export const WorkspaceSwitcher = () => {
@@ -29,6 +29,9 @@ export const WorkspaceSwitcher = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button className="size-9 relative overflow-hidden bg-[#ABABAD] hover:bg-[#ABABAAD]/80 text-slate-800 font-semibold text-lg">
+          {!workspace && !workspaceLoading && (
+            <TriangleAlert className="text-[#4e4e4e]" />
+          )}
           {workspaceLoading ? (
             <Loader2 className="size-5 animate-spin shrink-0" />
           ) : (
