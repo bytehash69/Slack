@@ -2,7 +2,6 @@ import { useMutation } from "convex/react";
 import { api } from "../../../../convex/_generated/api";
 import { useCallback, useMemo, useState } from "react";
 import { Id } from "../../../../convex/_generated/dataModel";
-import { tree } from "next/dist/build/templates/app-page";
 
 type RequestType = { id: Id<"workspaces">; name: string };
 type ResponseType = Id<"workspaces"> | null;

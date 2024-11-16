@@ -17,9 +17,11 @@ import { SidebarItem } from "./sidebar-item";
 import { WorkspaceSection } from "./workspace-section";
 import { UserItem } from "./user-item";
 import { useCreateChannelModal } from "@/features/channels/store/use-create-workspace-modal";
+import { useChannelId } from "@/hooks/use-channel-id";
 
 export const WorkspaceSidebar = () => {
   const workspaceId = useWorkspaceId();
+  const channelId = useChannelId();
 
   const [_open, setOpen] = useCreateChannelModal();
 
@@ -52,7 +54,7 @@ export const WorkspaceSidebar = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="flex flex-col bg-[#5E2C5F] h-full">
       <WorkspaceHeader
@@ -74,6 +76,7 @@ export const WorkspaceSidebar = () => {
             icon={HashIcon}
             label={item.name}
             id={item._id}
+            variant={channelId === item._id ? "active" : "default"}
           />
         ))}
       </WorkspaceSection>
