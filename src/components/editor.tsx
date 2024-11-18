@@ -33,6 +33,8 @@ import { Hint } from "./hint";
 import { Delta, Op } from "quill/core";
 import { cn } from "@/lib/utils";
 import { list } from "postcss";
+import { EmojiPopover } from "./emoji-popover";
+import { EmojiClickData } from "emoji-picker-react";
 const Editor = ({
   variant = "create",
   onSubmit,
@@ -141,7 +143,7 @@ const Editor = ({
     <div className="flex flex-col">
       <div className="flex flex-col border border-slate-200 rounded-md overflow-hidden focus-within:border-slate-300 focus-within:shadow-sm trasition bg-white">
         <div ref={containerRef} className="h-full ql-custom" />
-        <div className="flex px-2 pb-2 z-[5]">
+        <div className="flex items-center p-2 z-[5]">
           <Hint
             label={isToolbarVisible ? "Hide formatting" : "Show formatting"}
           >
@@ -151,17 +153,7 @@ const Editor = ({
               variant="ghost"
               onClick={toggleToolbar}
             >
-              <PiTextAa className="size-4" />
-            </Button>
-          </Hint>
-          <Hint label="Emoji">
-            <Button
-              disabled={disabled}
-              size="iconSm"
-              variant="ghost"
-              onClick={() => {}}
-            >
-              <Smile className="size-4" />
+              <PiTextAa className="" />
             </Button>
           </Hint>
           {variant === "create" && (
@@ -172,7 +164,7 @@ const Editor = ({
                 variant="ghost"
                 onClick={() => {}}
               >
-                <ImageIcon className="size-4" />
+                <ImageIcon className="" />
               </Button>
             </Hint>
           )}
@@ -196,21 +188,23 @@ const Editor = ({
               </Button>
             </div>
           )}
-          {variant === "create" && (
-            <Button
-              disabled={disabled || isEmpty}
-              size="sm"
-              className={cn(
-                "ml-auto",
-                isEmpty
-                  ? " bg-white hover:bg-white text-muted-foreground"
-                  : " bg-[#934594] hover:bg-[#934594]/80 text-white"
-              )}
-              onClick={() => {}}
-            >
-              <MdSend className="size-4" />
-            </Button>
-          )}
+          <div className="ml-auto flex items-center">
+            {variant === "create" && (
+              <Button
+                disabled={disabled || isEmpty}
+                size="sm"
+                className={cn(
+                  "ml-auto",
+                  isEmpty
+                    ? " bg-white hover:bg-white text-muted-foreground"
+                    : " bg-[#934594] hover:bg-[#934594]/80 text-white"
+                )}
+                onClick={() => {}}
+              >
+                <MdSend className="size-4" />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
       {variant === "create" && (
